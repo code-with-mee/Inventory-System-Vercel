@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Customer List{% endblock %}
+
+{% block content %}
+<div class="container-md">
+  <div class="page-header">
+    <h2 class="animate-fade-down">Customer List</h2>
+    <a href="{% url 'customer_add' %}" class="button-link animate-fade-up delay-1">Add Customer</a>
+  </div>
+
+  <table class="table" style="margin-top: 20px;">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Address</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for customer in customers %}
+      <tr>
+        <td>{{ customer.id }}</td>
+        <td>{{ customer.name }}</td>
+        <td>{{ customer.phone }}</td>
+        <td>{{ customer.address }}</td>
+        <td>
+          <a href="{% url 'customer_edit' customer.id %}" class="button-link button-sm button-secondary">Edit</a>
+          <a href="{% url 'customer_delete' customer.id %}" class="button-link button-sm delete-btn">Delete</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

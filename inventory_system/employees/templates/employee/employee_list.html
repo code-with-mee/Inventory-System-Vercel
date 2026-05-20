@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Employee List{% endblock %}
+
+{% block content %}
+<div class="container-md">
+  <div class="page-header">
+    <h2 class="animate-fade-down">Employee List</h2>
+    <a href="{% url 'employee_add' %}" class="button-link animate-fade-up delay-1">Add Employee</a>
+  </div>
+
+  <table class="table" style="margin-top: 20px;">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Address</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for employee in employees %}
+      <tr>
+        <td>{{ employee.id }}</td>
+        <td>{{ employee.name }}</td>
+        <td>{{ employee.phone }}</td>
+        <td>{{ employee.address }}</td>
+        <td>
+          <a href="{% url 'employee_edit' employee.id %}" class="button-link button-sm button-secondary">Edit</a>
+          <a href="{% url 'employee_delete' employee.id %}" class="button-link button-sm delete-btn">Delete</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

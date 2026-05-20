@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Create Purchase{% endblock %}
+
+{% block content %}
+<div class="container-md">
+  <div class="page-header">
+    <h2 class="animate-fade-down">Create Purchase</h2>
+  </div>
+
+  <div class="form-container">
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+
+      <div class="reveal">
+      <h4>Purchase Items</h4>
+      {{ formset.management_form }}
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for form in formset %}
+          <tr>
+            <td>{{ form.product }}</td>
+            <td>{{ form.quantity }}</td>
+            <td>{% if form.instance.pk %}{{ form.DELETE }}{% endif %}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      </div>
+
+      <button type="submit" class="button-link">Save Purchase</button>
+      <a href="{% url 'purchase_list' %}" class="button-link button-secondary">Cancel</a>
+    </form>
+  </div>
+</div>
+{% endblock %}

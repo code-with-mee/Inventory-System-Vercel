@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Purchase Detail{% endblock %}
+
+{% block content %}
+<div class="container-md">
+  <div class="page-header">
+    <h2 class="animate-fade-down">Purchase Details</h2>
+    {% if purchase.total_remain <= 0 %}
+      <span class="badge badge-success">Paid</span>
+    {% elif purchase.total_paid > 0 %}
+      <span class="badge badge-warning">Partial</span>
+    {% else %}
+      <span class="badge badge-danger">Unpaid</span>
+    {% endif %}
+  </div>
+
+  <div class="form-container animate-scale-in">
+    <p><strong>Purchase ID:</strong> {{ purchase.id }}</p>
+    <p><strong>Supplier:</strong> {{ purchase.supplier.name }}</p>
+    <p><strong>Employee:</strong> {{ purchase.employee.name }}</p>
+    <p><strong>Total Amount:</strong> ${{ purchase.total_amount }}</p>
+    <p><strong>Total Paid:</strong> ${{ purchase.total_paid }}</p>
+    <p><strong>Total Remain:</strong> ${{ purchase.total_remain }}</p>
+    <p><strong>Created At:</strong> {{ purchase.created_at|date:"Y-m-d H:i" }}</p>
+  </div>
+
+  <div class="reveal">
+  <h4 style="margin-top: 30px;">Purchase Items</h4>
+  <table class="table" style="margin-top: 10px;">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Total Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in purchase.items.all %}
+      <tr>
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>${{ item.total_price }}</td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="3">No items found for this purchase.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+
+  <a href="{% url 'purchase_list' %}" class="button-link" style="margin-top: 20px; display: inline-block;">Back to Purchase List</a>
+</div>
+{% endblock %}

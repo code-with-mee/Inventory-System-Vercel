@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <style>
+      .login-page {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fafafa;
+        flex-direction: column;
+      }
+      .login-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 26px;
+        font-weight: 600;
+        margin-bottom: 14px;
+        color: #303030;
+      }
+      .login-title::before {
+        content: "";
+        width: 26px;
+        height: 26px;
+        border-radius: 6px;
+        background: #fc6d26;
+      }
+      .form-container {
+        max-width: 400px;
+        width: 100%;
+      }
+      @keyframes login-fade-scale-in {
+        from {
+          opacity: 0;
+          transform: scale(0.96) translateY(12px);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+      }
+      .login-title,
+      .form-container {
+        animation: login-fade-scale-in 0.5s ease-out both;
+      }
+      .form-container {
+        animation-delay: 0.1s;
+      }
+      .form-container input {
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+      .form-container input:focus {
+        border-color: #1f75cb;
+        box-shadow: 0 0 0 3px rgba(31, 117, 203, 0.16);
+        outline: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-page">
+      <div class="login-title">Inventory System</div>
+
+      <div class="form-container">
+        <h2 style="text-align: center; margin-bottom: 20px;">Login</h2>
+        <form method="post">
+          {% csrf_token %}
+          <label for="username">Username</label>
+          <input type="text" name="username" placeholder="Enter your username" required />
+
+          <label for="password">Password</label>
+          <input type="password" name="password" placeholder="Enter your password" required />
+
+          <button type="submit" class="button-link" style="width: 100%; margin-top: 10px;">Login</button>
+        </form>
+
+        {% if messages %}
+          {% for message in messages %}
+            <p style="color: red; margin-top: 15px;">{{ message }}</p>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </body>
+</html>

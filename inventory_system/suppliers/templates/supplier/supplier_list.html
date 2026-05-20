@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Supplier List{% endblock %}
+
+{% block content %}
+<div class="container-md">
+  <div class="page-header">
+    <h2 class="animate-fade-down">Supplier List</h2>
+    <a href="{% url 'supplier_add' %}" class="button-link animate-fade-up delay-1">Add Supplier</a>
+  </div>
+
+  <table class="table" style="margin-top: 20px;">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Address</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for supplier in suppliers %}
+      <tr>
+        <td>{{ supplier.id }}</td>
+        <td>{{ supplier.name }}</td>
+        <td>{{ supplier.phone }}</td>
+        <td>{{ supplier.address }}</td>
+        <td>
+          <a href="{% url 'supplier_edit' supplier.id %}" class="button-link button-sm button-secondary">Edit</a>
+          <a href="{% url 'supplier_delete' supplier.id %}" class="button-link button-sm delete-btn">Delete</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

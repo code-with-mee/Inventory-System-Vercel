@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Order List{% endblock %}
+
+{% block content %}
+<div class="container-md">
+  <div class="page-header">
+    <h1 class="animate-fade-down">Order List</h1>
+    <a href="{% url 'order_add' %}" class="button-link animate-fade-up delay-1">Create Order</a>
+  </div>
+
+  <table class="table" style="margin-top: 20px;">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Customer</th>
+        <th>Employee</th>
+        <th>Total</th>
+        <th>Paid</th>
+        <th>Remain</th>
+        <th>Created At</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for order in orders %}
+      <tr>
+        <td>{{ order.id }}</td>
+        <td>{{ order.customer.name }}</td>
+        <td>{{ order.employee.name }}</td>
+        <td>${{ order.total_amount }}</td>
+        <td>${{ order.total_paid }}</td>
+        <td>${{ order.total_remain }}</td>
+        <td>{{ order.created_at|date:"Y-m-d H:i" }}</td>
+        <td>
+          {% if order.total_remain <= 0 %}
+            <span class="badge badge-success">Paid</span>
+          {% elif order.total_paid > 0 %}
+            <span class="badge badge-warning">Partial</span>
+          {% else %}
+            <span class="badge badge-danger">Unpaid</span>
+          {% endif %}
+        </td>
+        <td>
+          <a href="{% url 'order_detail' order.id %}" class="button-link button-sm button-secondary">View</a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="9">No orders found.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

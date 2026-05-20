@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}POS System{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    {% block extra_css %}{% endblock %}
+    <script src="{% static 'js/main.js' %}" defer></script>
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="left">
+        <a href="{% url 'dashboard_home' %}">POS Inventory</a>
+      </div>
+
+      <div class="center">
+        <a href="{% url 'dashboard_home' %}">Dashboard</a>
+        <a href="{% url 'category_list' %}">Category</a>
+        <a href="{% url 'product_list' %}">Product</a>
+        <a href="{% url 'customer_list' %}">Customer</a>
+        <a href="{% url 'supplier_list' %}">Supplier</a>
+        <a href="{% url 'order_list' %}">Order</a>
+        <a href="{% url 'purchase_list' %}">Purchase</a>
+      </div>
+      <div class="right">
+        <a href="{% url 'logout' %}">Logout</a>
+      </div>
+    </div>
+
+    <div class="container">{% block content %}{% endblock %}</div>
+  </body>
+</html>

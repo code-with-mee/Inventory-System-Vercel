@@ -1,0 +1,9 @@
+{
+  "buildCommand": "pip install -r requirements.txt && python manage.py collectstatic --noinput",
+  "builds": [
+    { "src": "inventory_system/wsgi.py", "use": "@vercel/python" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "inventory_system/wsgi.py" }
+  ]
+}

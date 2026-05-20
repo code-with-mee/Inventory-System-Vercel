@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Order Detail{% endblock %}
+
+{% block content %}
+<div class="container-md">
+  <div class="page-header">
+    <h2 class="animate-fade-down">Order Details</h2>
+    {% if order.total_remain <= 0 %}
+      <span class="badge badge-success">Paid</span>
+    {% elif order.total_paid > 0 %}
+      <span class="badge badge-warning">Partial</span>
+    {% else %}
+      <span class="badge badge-danger">Unpaid</span>
+    {% endif %}
+  </div>
+
+  <div class="form-container animate-scale-in">
+    <p><strong>Order ID:</strong> {{ order.id }}</p>
+    <p><strong>Customer:</strong> {{ order.customer.name }}</p>
+    <p><strong>Employee:</strong> {{ order.employee.name }}</p>
+    <p><strong>Total Amount:</strong> ${{ order.total_amount }}</p>
+    <p><strong>Total Paid:</strong> ${{ order.total_paid }}</p>
+    <p><strong>Total Remain:</strong> ${{ order.total_remain }}</p>
+    <p><strong>Created At:</strong> {{ order.created_at|date:"Y-m-d H:i" }}</p>
+  </div>
+
+  <div class="reveal">
+  <h4 style="margin-top: 30px;">Order Items</h4>
+  <table class="table" style="margin-top: 10px;">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Total Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in order.items.all %}
+      <tr>
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>${{ item.total_price }}</td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="3">No items in this order.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+
+  <a href="{% url 'order_list' %}" class="button-link" style="margin-top: 20px; display: inline-block;">Back to Order List</a>
+</div>
+{% endblock %}

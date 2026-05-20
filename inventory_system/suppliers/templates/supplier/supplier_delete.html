@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Delete Supplier{% endblock %}
+
+{% block content %}
+<div class="container-sm">
+  <div class="page-header">
+    <h2 class="animate-fade-down">Do you want to delete supplier : {{ supplier.name }}</h2>
+  </div>
+  <div class="form-container animate-scale-in">
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" class="button-link delete-btn">Confirm</button>
+      <a href="{% url 'supplier_list' %}" class="button-link button-secondary">Cancel</a>
+    </form>
+  </div>
+</div>
+{% endblock %}

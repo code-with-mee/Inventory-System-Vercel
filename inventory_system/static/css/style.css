@@ -1,0 +1,557 @@
+/* ============================================================
+   GitLab-inspired theme — Inventory System
+   ============================================================ */
+
+:root {
+  --bg: #fafafa;
+  --surface: #ffffff;
+  --border: #dcdcde;
+  --border-strong: #bfbfc3;
+  --text: #303030;
+  --text-secondary: #626168;
+  --text-muted: #89888d;
+  --blue: #1f75cb;
+  --blue-hover: #1068bf;
+  --link: #1068bf;
+  --orange: #fc6d26;
+  --green: #108548;
+  --green-bg: #ecf4ee;
+  --red: #dd2b0e;
+  --red-hover: #c91c00;
+  --red-bg: #fdf0ee;
+  --amber: #9e5400;
+  --amber-bg: #fdf1dd;
+  --radius: 4px;
+  --radius-lg: 8px;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.07);
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text);
+  background-color: var(--bg);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--text);
+  font-weight: 600;
+}
+h1 {
+  font-size: 20px;
+}
+h2 {
+  font-size: 18px;
+}
+h3 {
+  font-size: 15px;
+}
+h4 {
+  font-size: 14px;
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Navbar (top, GitLab style) ---------- */
+.navbar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  height: 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navbar .left {
+  display: flex;
+  align-items: center;
+}
+.navbar .left a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 16px;
+  text-decoration: none;
+}
+.navbar .left a::before {
+  content: "";
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  background: var(--orange);
+}
+.navbar .center {
+  display: flex;
+  align-items: stretch;
+  height: 48px;
+}
+.navbar .center a {
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  height: 48px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 14px;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s ease, background-color 0.15s ease,
+    border-color 0.15s ease;
+}
+.navbar .center a:hover {
+  color: var(--text);
+  background: #f5f5f5;
+  border-bottom-color: var(--orange);
+  text-decoration: none;
+}
+.navbar .right {
+  display: flex;
+  align-items: center;
+}
+.navbar .right a {
+  color: var(--text-secondary);
+  font-weight: 500;
+  padding: 6px 10px;
+  border-radius: var(--radius);
+}
+.navbar .right a:hover {
+  color: var(--text);
+  background: #f5f5f5;
+  text-decoration: none;
+}
+
+/* ---------- Layout containers ---------- */
+.container,
+.container-sm,
+.container-md,
+.container-lg {
+  margin: 24px auto;
+  padding: 0 24px;
+}
+.container,
+.container-lg {
+  max-width: 1200px;
+}
+.container-md {
+  max-width: 960px;
+}
+.container-sm {
+  max-width: 560px;
+}
+
+/* ---------- Page header (title + actions row) ---------- */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+.page-header h1,
+.page-header h2 {
+  margin: 0;
+}
+
+/* ---------- Dashboard cards ---------- */
+.dashboard-card {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+.card {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blue);
+  border-radius: var(--radius-lg);
+  padding: 16px 18px;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.18s ease, transform 0.18s ease,
+    border-color 0.18s ease;
+}
+.card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+  border-left-color: var(--orange);
+}
+.card h3 {
+  margin: 0 0 6px 0;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+}
+.card p {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ---------- Tables ---------- */
+table.table {
+  width: 100%;
+  background: var(--surface);
+  border-collapse: collapse;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  font-size: 14px;
+}
+table.table thead {
+  background: #fbfafd;
+}
+table.table th {
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+}
+table.table td {
+  padding: 10px 14px;
+  text-align: left;
+  color: var(--text);
+  border-bottom: 1px solid #f0f0f1;
+}
+table.table tbody tr:last-child td {
+  border-bottom: none;
+}
+table.table tbody tr {
+  transition: background-color 0.15s ease;
+}
+table.table tbody tr:hover {
+  background: #f5f5f5;
+}
+table.table p {
+  margin: 0;
+}
+
+/* ---------- Buttons ---------- */
+.button-link,
+a.button-link,
+button.button-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 7px 12px;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  border-radius: var(--radius);
+  border: 1px solid var(--blue);
+  background: var(--blue);
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease,
+    box-shadow 0.15s ease, transform 0.1s ease;
+}
+.button-link:hover {
+  background: var(--blue-hover);
+  border-color: var(--blue-hover);
+  color: #fff;
+  text-decoration: none;
+}
+.button-link:active {
+  transform: translateY(1px);
+}
+
+/* secondary (white) button */
+.button-secondary,
+.button-link.button-secondary {
+  background: var(--surface);
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+.button-secondary:hover,
+.button-link.button-secondary:hover {
+  background: #f5f5f5;
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+
+/* danger button */
+.button-link.delete-btn,
+.button-danger {
+  background: var(--red);
+  border-color: var(--red);
+  color: #fff;
+}
+.button-link.delete-btn:hover,
+.button-danger:hover {
+  background: var(--red-hover);
+  border-color: var(--red-hover);
+  color: #fff;
+}
+
+.button-sm {
+  padding: 4px 9px;
+  font-size: 12px;
+}
+
+/* ---------- Badges (GitLab-style pills) ---------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 9px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+  border-radius: 10px;
+}
+.badge-success {
+  background: var(--green-bg);
+  color: var(--green);
+}
+.badge-danger {
+  background: var(--red-bg);
+  color: var(--red);
+}
+.badge-warning {
+  background: var(--amber-bg);
+  color: var(--amber);
+}
+.badge-info {
+  background: #e9f3fc;
+  color: var(--blue-hover);
+}
+.badge-neutral {
+  background: #ececef;
+  color: var(--text-secondary);
+}
+
+/* ---------- Forms ---------- */
+.form-container {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  margin-top: 16px;
+  box-shadow: var(--shadow-sm);
+  width: 100%;
+}
+.form-container p {
+  margin: 0 0 14px 0;
+}
+.form-container label {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text);
+}
+.form-container input,
+.form-container select,
+.form-container textarea {
+  width: 100%;
+  padding: 8px 10px;
+  margin-bottom: 4px;
+  font-family: var(--font);
+  font-size: 14px;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.form-container input:focus,
+.form-container select:focus,
+.form-container textarea:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(31, 117, 203, 0.16);
+}
+.form-container button,
+.form-container .button-link {
+  margin-top: 8px;
+}
+
+/* ============================================================
+   Animations & micro-interactions
+   ============================================================ */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* page load */
+body {
+  animation: fadeIn 0.3s ease both;
+}
+.navbar {
+  animation: fadeInDown 0.4s ease both;
+}
+.container,
+.container-sm,
+.container-md,
+.container-lg {
+  animation: fadeInUp 0.45s ease both;
+}
+
+/* entry utility classes */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease both;
+}
+.animate-fade-up {
+  animation: fadeInUp 0.5s ease both;
+}
+.animate-fade-down {
+  animation: fadeInDown 0.5s ease both;
+}
+.animate-slide-left {
+  animation: slideInLeft 0.5s ease both;
+}
+.animate-slide-right {
+  animation: slideInRight 0.5s ease both;
+}
+.animate-scale-in {
+  animation: scaleIn 0.4s ease both;
+}
+
+/* stagger: JS sets --i (0,1,2,...) on children of .stagger */
+.stagger > * {
+  animation: fadeInUp 0.45s ease both;
+  animation-delay: calc(var(--i, 0) * 70ms);
+}
+.delay-1 {
+  animation-delay: 0.07s;
+}
+.delay-2 {
+  animation-delay: 0.14s;
+}
+.delay-3 {
+  animation-delay: 0.21s;
+}
+.delay-4 {
+  animation-delay: 0.28s;
+}
+.delay-5 {
+  animation-delay: 0.35s;
+}
+
+/* scroll reveal (JS adds .in-view) */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.reveal.in-view {
+  opacity: 1;
+  transform: none;
+}
+
+/* staggered table rows (JS adds .row-enter) */
+table.table tbody tr.row-enter {
+  animation: fadeInUp 0.35s ease both;
+  animation-delay: calc(var(--i, 0) * 40ms);
+}
+
+/* hover helpers */
+.hover-lift {
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+
+/* respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

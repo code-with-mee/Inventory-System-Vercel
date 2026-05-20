@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Purchase List{% endblock %}
+
+{% block content %}
+<div class="container-md">
+  <div class="page-header">
+    <h1 class="animate-fade-down">Purchase List</h1>
+    <a href="{% url 'purchase_add' %}" class="button-link animate-fade-up delay-1">Create Purchase</a>
+  </div>
+
+  <table class="table" style="margin-top: 20px;">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Supplier</th>
+        <th>Employee</th>
+        <th>Total</th>
+        <th>Paid</th>
+        <th>Remain</th>
+        <th>Created At</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for purchase in purchases %}
+      <tr>
+        <td>{{ purchase.id }}</td>
+        <td>{{ purchase.supplier.name }}</td>
+        <td>{{ purchase.employee.name }}</td>
+        <td>${{ purchase.total_amount }}</td>
+        <td>${{ purchase.total_paid }}</td>
+        <td>${{ purchase.total_remain }}</td>
+        <td>{{ purchase.created_at|date:"Y-m-d H:i" }}</td>
+        <td>
+          {% if purchase.total_remain <= 0 %}
+            <span class="badge badge-success">Paid</span>
+          {% elif purchase.total_paid > 0 %}
+            <span class="badge badge-warning">Partial</span>
+          {% else %}
+            <span class="badge badge-danger">Unpaid</span>
+          {% endif %}
+        </td>
+        <td>
+          <a href="{% url 'purchase_detail' purchase.id %}" class="button-link button-sm button-secondary">View</a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="9">No purchases found.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

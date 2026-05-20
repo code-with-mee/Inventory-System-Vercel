@@ -1,0 +1,13 @@
+env/
+venv/
+.venv/
+__pycache__/
+*.pyc
+db.sqlite3
+db.sqlite3-journal
+.env
+.env.*
+.claude/
+*.log
+.git/
+.DS_Store

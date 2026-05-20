@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Create Order{% endblock %}
+
+{% block content %}
+<div class="container-md">
+  <div class="page-header">
+    <h2 class="animate-fade-down">Create Order</h2>
+  </div>
+
+  <div class="form-container">
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+
+      <div class="reveal">
+      <h4 style="margin-top: 20px;">Order Items</h4>
+      {{ formset.management_form }}
+
+      <table class="table" style="margin-top: 10px;">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Remove</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for form in formset %}
+          <tr>
+            <td>{{ form.product }}</td>
+            <td>{{ form.quantity }}</td>
+            <td>
+              {% if form.instance.pk %}
+                {{ form.DELETE }}
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      </div>
+
+      <button type="submit" class="button-link">Save Order</button>
+      <a href="{% url 'order_list' %}" class="button-link button-secondary">Cancel</a>
+    </form>
+  </div>
+</div>
+{% endblock %}

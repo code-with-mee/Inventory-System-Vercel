@@ -1,0 +1,36 @@
+{% extends "base.html" %} {% block title %}Dashboard{% endblock %} {% block content %}
+
+<div class="container-md">
+  <div class="page-header">
+    <h2 class="animate-fade-down">Dashboard</h2>
+  </div>
+
+  <div class="dashboard-card stagger">
+    <div class="card">
+      <h3>Total Categories</h3>
+      <p>{{ total_category }}</p>
+    </div>
+    <div class="card">
+      <h3>Total Products</h3>
+      <p>{{ total_product }}</p>
+    </div>
+    <div class="card">
+      <h3>Total Customers</h3>
+      <p>{{ total_customer }}</p>
+    </div>
+    <div class="card">
+      <h3>Total Suppliers</h3>
+      <p>{{ total_supplier }}</p>
+    </div>
+    <div class="card">
+      <h3>Total Order Amount</h3>
+      <p>${{ total_order_amount }}</p>
+    </div>
+    <div class="card">
+      <h3>Total Purchase Amount</h3>
+      <p>${{ total_purchase_amount }}</p>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
